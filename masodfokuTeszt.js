@@ -1,43 +1,52 @@
+import { masodfoku } from "./fuggvenyek.js";
+
 function masodfokuTeszt(){
     const esetLista= [
         {
             a: 12,
             b: 5,
             c:2,
-            vart: "nincs valós megoldás",
+            vart: {x1: "nincs valós megoldás", x2: "nincs valós megoldás"},
             szoveg: "nincs valós megoldása"
         },
         {
-            a: 3,
-            b: 5,
-            c: 2,
-            vart: "x1: 0.66, x2: 1",
-            szoveg: "két valós megoldás van"
+            a: 0,
+            b: 2,
+            c: -4,
+            vart: {x1: 0, x2: "sok"},
+            szoveg: "a = 0"
         },
         {
             a: 1,
             b: -3,
             c: 2,
-            vart: "x1: 2, x2: 1",
-            szoveg: " két valós megoldása van"
+            vart: {x1: 2, x2: 1},
+            szoveg: "két valós megoldása van"
         },
         {
             a: 1,
             b: 2,
             c: 1,
-            vart: "x1: 1, x2: nincs",
-            szoveg: " egy valós megoldása van"
+            vart: {x1: 1, x2: "nincs"},
+            szoveg: "egy valós megoldása van"
+        },
+        {
+            a: 0,
+            b: 0,
+            c: 0,
+            vart: {x1: 0, x2: "nincs"},
+            szoveg: "mind 0"
         },
     ]
 
-    for (let index = 0; index < esetLista.length; index++) {
-        let eredmeny = masodfoku(esetLista[index].a, esetLista[index].b, esetLista[index].c);
+    esetLista.forEach((eset) => {
+        let eredmeny = masodfoku(eset.a, eset.b, eset.c);
         console.assert(
-            eredmeny.x1 == esetLista[index].vart.x1 &&
-            eredmeny.x2 == esetLista[index].vart.x2,
-            `Hiba: ${esetLista[index].szoveg}`
+                eredmeny.x1 == eset.vart.x1 &&
+                eredmeny.x2 == eset.vart.x2,
+                /*JSON.stringify(eredmeny) == JSON.stringify(eset.vart),*/
+                 `${eset.szoveg}`
         );
-    }
-    console.log("Minden teszt lefutott")
+    });
 }
 masodfokuTeszt();
